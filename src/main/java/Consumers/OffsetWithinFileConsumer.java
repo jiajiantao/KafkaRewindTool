@@ -41,7 +41,7 @@ public class OffsetWithinFileConsumer {
                 if (numErrors > 5)
                     ;
                 if (code == ErrorMapping.OffsetOutOfRangeCode()) {
-                    // We asked for an invalid offset. For simple case ask for the last element to reset
+                    //For simple case ask for the last element to reset
                     readOffset = fileOffset;
 
                 }
@@ -77,16 +77,6 @@ public class OffsetWithinFileConsumer {
 
             }
         }
-
-
-
-//            if (numRead == 0) {
-//                try {
-//                    Thread.sleep(1000);
-//                } catch (InterruptedException ie) {
-//                }
-//            }
-
 
         if (consumer != null) consumer.close();
 
