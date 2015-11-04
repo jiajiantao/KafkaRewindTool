@@ -15,6 +15,7 @@ public class OffsetWithinFileConsumer {
 
     public static long run(String topic, long rewindTime, long fileOffset, int partition, String leaderHost, int leaderPort) {
 
+
         SimpleConsumer consumer = new SimpleConsumer(leaderHost, leaderPort, 1000000, 64 * 1024, "OffsetWithinFileConsumer");
         long readOffset = fileOffset;
 

@@ -24,8 +24,6 @@ public class FindMetadata {
 //        System.out.println(topicMetadataResponse.topicsMetadata().get(0).partitionsMetadata().get(1).leader().);
         return topicMetadataResponse;
 
-
-
     }
 }
 
