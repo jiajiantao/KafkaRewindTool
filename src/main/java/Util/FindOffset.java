@@ -29,9 +29,16 @@ public class FindOffset {
             return 0;
         }
         long[] offsets = offsetResponse.offsets(topic, partition);
-        System.out.println("Partition:"+partition+"FileOffset:"+offsets[0]);
-        return offsets[0];
-
+        long fileOffset=0;
+        try{
+            fileOffset = offsets[0];
+        }
+        catch (ArrayIndexOutOfBoundsException exception){
+            fileOffset=0;
+        }
+        finally {
+            return fileOffset;
+        }
     }
 
     private static long getOffsetWithinFile(String topic, long rewindTime,long fileOffset, int partition,String leaderHost, int leaderPort){
