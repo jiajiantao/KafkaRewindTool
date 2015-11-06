@@ -13,7 +13,7 @@ public class RewindTool {
 
     public static final String consumerGroup = "testgroup";
     public static final String topic = "TestMessagesFinal";
-    public static final Long rewindTime = 1446620099851L;
+    public static final Long rewindTime = 1444129970000L;
 
     public static void main(String[] args) {
 
