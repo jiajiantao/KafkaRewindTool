@@ -16,8 +16,10 @@ public class CommitOffset {
 
 
 
-    public static void commitPartitionOffsets(String topic, String consumerGroup, Map<Integer, Long> partitionOffsets){
+    public static void commitPartitionOffsets(String topic, String topicHost, Integer topicPort , String consumerGroup, Map<Integer, Long> partitionOffsets){
 
+        System.out.println("kkkk");
+        //System.out.println(partitionOffsets);
         for (Map.Entry<Integer, Long> entry : partitionOffsets.entrySet()) {
 
             TopicAndPartition topicAndPartition = new TopicAndPartition(topic, entry.getKey());
@@ -27,7 +29,7 @@ public class CommitOffset {
             int correlationId = 0;
             OffsetCommitRequest offsetCommitRequest = new OffsetCommitRequest(consumerGroup,responseInfo,correlationId,consumerGroup);
 
-            SimpleConsumer simpleConsumer = new SimpleConsumer("localhost", 9092, 100000, 64 * 1024,"OffsetCommitConsumer");
+            SimpleConsumer simpleConsumer = new SimpleConsumer(topicHost, topicPort, 100000, 64 * 1024,"OffsetCommitConsumer");
             OffsetCommitResponse offsetCommitResponse = simpleConsumer.commitOffsets(offsetCommitRequest);
 
 //            System.out.println(offsetCommitResponse.errorCode(topicAndPartition));
