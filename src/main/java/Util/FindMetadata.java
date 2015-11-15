@@ -12,9 +12,9 @@ import java.util.List;
 public class FindMetadata {
 
 
-    public static TopicMetadataResponse findPartitionInfo(String topic) {
+    public static TopicMetadataResponse findPartitionInfo(String topic, String topicHost, Integer topicPort) {
 
-        SimpleConsumer simpleConsumer = new SimpleConsumer("rishi-Latitude-E7250", 9093, 100000, 64*1024, "PartitonInfoFinderClient");
+        SimpleConsumer simpleConsumer = new SimpleConsumer(topicHost,topicPort , 100000, 64*1024, "PartitonInfoFinderClient");
         List<String> topics = new ArrayList<String>();
         topics.add(topic);
 
