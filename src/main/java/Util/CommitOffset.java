@@ -18,8 +18,6 @@ public class CommitOffset {
 
     public static void commitPartitionOffsets(String topic, String topicHost, Integer topicPort , String consumerGroup, Map<Integer, Long> partitionOffsets){
 
-        System.out.println("kkkk");
-        //System.out.println(partitionOffsets);
         for (Map.Entry<Integer, Long> entry : partitionOffsets.entrySet()) {
 
             TopicAndPartition topicAndPartition = new TopicAndPartition(topic, entry.getKey());
