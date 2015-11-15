@@ -30,7 +30,27 @@ public class CommitOffset {
             SimpleConsumer simpleConsumer = new SimpleConsumer(topicHost, topicPort, 100000, 64 * 1024, "OffsetCommitConsumer");
             OffsetCommitResponse offsetCommitResponse = simpleConsumer.commitOffsets(offsetCommitRequest);
 
-//            System.out.println(offsetCommitResponse.errorCode(topicAndPartition));
+            //In case of error rollback
+            if(offsetCommitResponse.errorCode(topicAndPartition)!=0){
+                for (Map.Entry<Integer, Long> entry2 : oldPartitionOffsets.entrySet()) {
+                    if(entry2.getKey()!=entry.getKey()){
+                        TopicAndPartition topicAndPartition2 = new TopicAndPartition(topic, entry2.getKey());
+                        OffsetAndMetadata offsetAndMetadata2 = new OffsetAndMetadata(entry2.getValue(), OffsetAndMetadata.NoMetadata(), -1);
+                        Map<TopicAndPartition, OffsetAndMetadata> responseInfo2 = new HashMap<TopicAndPartition, OffsetAndMetadata>();
+                        responseInfo.put(topicAndPartition2, offsetAndMetadata2);
+                        OffsetCommitRequest offsetCommitRequest2 = new OffsetCommitRequest(consumerGroup, responseInfo, correlationId, consumerGroup);
+
+                        SimpleConsumer simpleConsumer2 = new SimpleConsumer(topicHost, topicPort, 100000, 64 * 1024, "OffsetCommitConsumer");
+                        OffsetCommitResponse offsetCommitResponse2 = simpleConsumer.commitOffsets(offsetCommitRequest);
+
+
+                    }
+                    else
+                        break;
+
+                }
+                break;
+            }
          }
 
     }
