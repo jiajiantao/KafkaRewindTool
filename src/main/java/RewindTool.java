@@ -11,9 +11,6 @@ import java.util.Map;
  */
 public class RewindTool {
 
-
-
-
     private String consumerGroup ;
     private String topic ;
     private  String topicHost ;
